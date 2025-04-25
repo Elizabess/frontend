@@ -1,14 +1,18 @@
 image: Ubuntu1804 # образ для сборки
 
-stack: node 12 # окружение
+environment:
+  NODE_VERSION: "16" 
 
 branches:
   only:
     - main # ветка git
 
-cache: node_modules # кеширование
+cache:
+  - node_modules # кеширование
 
 install:
+  - curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - # установка Node.js
+  - sudo apt-get install -y nodejs # установка Node.js
   - yarn install # команда установки зависимостей
 
 build: off # отключаем встроенную в appveyor систему сборки
